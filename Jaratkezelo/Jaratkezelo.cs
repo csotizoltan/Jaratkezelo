@@ -62,7 +62,6 @@ namespace Jaratkezelo
         }
 
 
-
         public List<string> JaratokRepuloterrol(string repter)
         {
             List<string> repulokSzama = new List<string>();
