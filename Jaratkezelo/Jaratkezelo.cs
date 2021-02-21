@@ -28,21 +28,38 @@ namespace Jaratkezelo
         {
             foreach (var item in jaratok)
             {
-                int keso = 0;
-
                 if (item.JaratSzam.Equals(jaratSzam))
                 {
-                    if ((keso + keses) < keso)
+                    if ((item.Keses + keses) > 0)
                     {
-                        keso += keses; //keso = keso + keses;
+                        item.Keses += keses; //keso = keso + keses;
                     }
 
                     else
                     {
                         throw new NegativKesesException(keses);
                     }
+                }
+            }
+        }
 
-                    keso += keses; //keso = keso + keses;
+
+        // Keses --> TimeSpan
+        public void KesesTS(string jaratSzam, TimeSpan keses)
+        {
+            foreach (var item in jaratok)
+            {
+                if (item.JaratSzam.Equals(jaratSzam))
+                {
+                    if ((item.KesesTS + keses) > new TimeSpan(0,0,0))
+                    {
+                        item.KesesTS += keses;
+                    }
+
+                    else
+                    {
+                        throw new NegativKesesException(keses);
+                    }
                 }
             }
         }
@@ -54,7 +71,7 @@ namespace Jaratkezelo
             {
                 if (item.JaratSzam.Equals(jaratSzam))
                 {
-                    return item.Indulas + item.Keses;
+                    return item.Indulas + item.KesesTS;
                 }
             }
 
@@ -62,20 +79,49 @@ namespace Jaratkezelo
         }
 
 
+        // MikorIndul --> TimeSpan
+        public DateTime MikorIndulTS(string jaratSzam)
+        {
+            foreach (var item in jaratok)
+            {
+                if (item.JaratSzam.Equals(jaratSzam))
+                {
+                    return item.Indulas + item.KesesTS;
+                }
+            }
+
+            throw new ArgumentException(jaratSzam);
+        }
+
+        
         public List<string> JaratokRepuloterrol(string repter)
         {
-            List<string> repulokSzama = new List<string>();
+            List<string> JaratokSzama = new List<string>();
 
             foreach (var item in jaratok)
             {
                 if (item.HonnanRepter.Equals(repter))
                 {
-                    repulokSzama.Add(item.JaratSzam);
-                    return repulokSzama;
+                    JaratokSzama.Add(item.JaratSzam);
+                    return JaratokSzama;
                 }
             }
 
             throw new ArgumentException(repter);
+        }
+
+
+        public Jarat JaratInfo(string jaratSzam)
+        {
+            foreach (var item in jaratok)
+            {
+                if (item.JaratSzam.Equals(jaratSzam))
+                {
+                    return item;
+                }
+            }
+
+            throw new ArgumentException(jaratSzam);
         }
     }
 }

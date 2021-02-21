@@ -12,8 +12,8 @@ namespace Jaratkezelo
         public string HonnanRepter;
         public string HovaRepter;
         public DateTime Indulas;
-        //public int Keses; // vagy public TimeSpan Keses { get; set; }
-        public TimeSpan Keses { get; set; }
+        public int Keses;
+        public TimeSpan KesesTS { get; set; }
 
 
         public Jarat(string jaratSzam, string honnanRepter, string hovaRepter, DateTime indulas)
@@ -22,8 +22,8 @@ namespace Jaratkezelo
             HonnanRepter = honnanRepter;
             HovaRepter = hovaRepter;
             Indulas = indulas;
-            //Keses = 0; //  Keses = TimeSpan.Zero;
-            Keses = TimeSpan.Zero;
+            Keses = 0;
+            KesesTS = TimeSpan.Zero; // Értékadás 15 perc: TimeSpan.FromMinutes(15);
         }
     }
 }
